@@ -1,0 +1,205 @@
+<html>
+	<head>
+		<title>Canvas drawing</title>
+    <meta property="og:image" content="ogimage.png" />
+    <meta property="og:title" content="Drawing Crazy Circles"/>
+    <meta property="og:description" content="A crazy page to draw circles"/>
+    <script src="howler.min.js"></script>
+  </head>
+	<body>
+
+		<div id="sketch" style="height: 100% ; width: 100%;">
+			<canvas id="paint"></canvas>
+		</div>
+		<audio id="audio1">
+			 <source src="music/Piano12.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio2">
+			 <source src="music/Piano11.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio3">
+			 <source src="music/Piano13.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+
+		<audio id="audio4">
+			 <source src="music/Piano14.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio5">
+			 <source src="music/Piano15.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+    <audio id="audio6">
+			 <source src="music/Piano111.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio7">
+			 <source src="music/Piano120.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+    <audio id="audio8">
+			 <source src="music/Piano125.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio9">
+			 <source src="music/Piano19.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio10">
+			 <source src="music/Piano121.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio11">
+			 <source src="music/Piano122.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+
+
+		<audio id="audio13">
+			 <source src="music/Piano17.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio14">
+			 <source src="music/Piano113.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio15">
+			 <source src="music/Piano119.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio16">
+			 <source src="music/Piano115.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio17">
+			 <source src="music/Piano123.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio18">
+			 <source src="music/Piano116.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+		</audio>
+			<script type="text/javascript">
+      		    
+/**
+		var urls =['music/Piano12.mp3'];
+
+		      	var player = new Howl({
+            		urls : ['music/Piano12.mp3'],
+                volume: 0.5,
+                loop : false,
+                buffer: true
+            	});*/
+
+ 
+        function getRandomPlay() 
+        {
+
+       		var index = Math.floor(Math.random() * 18);
+          var selecttor = "#audio"+ index;
+          var player = document.querySelector(selecttor);   
+          player.loop = true;
+          player.play();
+
+        }
+
+
+
+
+
+
+			function getRandomColor() {
+		    var letters = '0123456789ABCDEF'.split('');
+		    var color = '#';
+		    for (var i = 0; i < 6; i++ ) {
+		        color += letters[Math.floor(Math.random() * 16)];
+		    }
+		    return color;
+			}
+			function getProgressiveColor(color) {
+					hexString = color.replace('#','');
+					 number = parseInt(hexString, 16);
+					 number += 1;
+					 return "#"+number.toString(16);
+
+			}
+			var canvas = document.querySelector('#paint');
+			var ctx = canvas.getContext('2d');
+			var sketch = document.querySelector('#sketch');
+			var sketch_style = getComputedStyle(sketch);
+			canvas.width = parseInt(sketch_style.	getPropertyValue('width'));
+			canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+			var mouse = {x: 0, y: 0};
+			var color = "#000000";
+			/* Capturando el mouse  | Cambiar por teclas*/
+
+			canvas.addEventListener('mousemove',function  (e) {
+					mouse.x = e.pageX - this.offsetLeft;
+					mouse.y = e.pageY - this.offsetTop;
+					//console.log(mouse);
+
+			}
+			,false);
+
+			ctx.lineWidth = 5;
+			ctx.lineJoin = 'round';
+			ctx.lineCap = 'round';
+			ctx.strokeStyle = getRandomColor();
+			 
+			canvas.addEventListener('mousedown', function(e) {
+			    ctx.moveTo(mouse.x, mouse.y);
+			 	ctx.strokeStyle = getRandomColor();
+			    canvas.addEventListener('mousemove', onPaint, false);
+			}, false);
+			 
+			canvas.addEventListener('mouseup', function() {
+			    canvas.removeEventListener('mousemove', onPaint,false);
+			}, false);
+			 
+			var onPaint = function() {
+			    //ctx.beginPath();
+			    ctx.beginPath();
+			    ctx.strokeStyle = getRandomColor();
+			        var x = Math.floor(Math.random() *100);
+			            var y = Math.floor(Math.random() *100);
+			            var z = Math.floor(Math.random() *100);
+
+
+				ctx.arc(mouse.x,mouse.y,40,z,Math.PI-y);
+				ctx.fillStyle= getRandomColor();
+				ctx.fill();
+        getRandomPlay();
+			};
+
+		</script>
+	</body>
+
+</html>
