@@ -1,0 +1,176 @@
+<html>
+	<head>
+		<title>Canvas drawing</title>
+    <meta property="og:image" content="ogimage.png" />
+    <meta property="og:title" content="Drawing Crazy Circles"/>
+    <meta property="og:description" content="A crazy page to draw circles"/>
+    <script src="howler.min.js"></script>
+  </head>
+	<body>
+
+		<div id="sketch" style="height: 100% ; width: 100%;">
+			<canvas id="paint"></canvas>
+		</div>
+		<audio id="audio1">
+			 <source src="music/audio2.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio2">
+			 <source src="music/audio1.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio3">
+			 <source src="music/audio3.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+
+		<audio id="audio4">
+			 <source src="music/audio4.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio5">
+			 <source src="music/audio5.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+    <audio id="audio6">
+			 <source src="music/audio6.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio7">
+			 <source src="music/audio7.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+    <audio id="audio8">
+			 <source src="music/audio8.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="audio9">
+			 <source src="music/audio9.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio10">
+			 <source src="music/audio10.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+		<audio id="audio11">
+			 <source src="music/audio12.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+
+
+		<audio id="audio12">
+			 <source src="music/audio11.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+		</audio>
+
+
+<script type="text/javascript">
+/**
+		var urls =['music/audio12.ogg'];
+
+		      	var player = new Howl({
+            		urls : ['music/audio12.ogg'],
+                volume: 0.5,
+                loop : false,
+                buffer: true
+            	});*/
+
+ 
+        function getRandomPlay() 
+        {
+
+       		var index = Math.floor(Math.random() * 12);
+          var selecttor = "#audio"+ index;
+          var player = document.querySelector(selecttor);   
+          player.play();
+
+        }
+
+
+
+
+
+
+			function getRandomColor() {
+		    var letters = '0123456789ABCDEF'.split('');
+		    var color = '#';
+		    for (var i = 0; i < 6; i++ ) {
+		        color += letters[Math.floor(Math.random() * 16)];
+		    }
+		    return color;
+			}
+			function getProgressiveColor(color) {
+					hexString = color.replace('#','');
+					 number = parseInt(hexString, 16);
+					 number += 1;
+					 return "#"+number.toString(16);
+
+			}
+			var canvas = document.querySelector('#paint');
+			var ctx = canvas.getContext('2d');
+			var sketch = document.querySelector('#sketch');
+			var sketch_style = getComputedStyle(sketch);
+			canvas.width = parseInt(sketch_style.	getPropertyValue('width'));
+			canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+			var mouse = {x: 0, y: 0};
+			var color = "#000000";
+			/* Capturando el mouse  | Cambiar por teclas*/
+
+			canvas.addEventListener('mousemove',function  (e) {
+					mouse.x = e.pageX - this.offsetLeft;
+					mouse.y = e.pageY - this.offsetTop;
+					//console.log(mouse);
+
+			}
+			,false);
+
+			ctx.lineWidth = 5;
+			ctx.lineJoin = 'round';
+			ctx.lineCap = 'round';
+			ctx.strokeStyle = getRandomColor();
+			 
+			canvas.addEventListener('mousedown', function(e) {
+			    ctx.moveTo(mouse.x, mouse.y);
+			 	ctx.strokeStyle = getRandomColor();
+			    canvas.addEventListener('mousemove', onPaint, false);
+			}, false);
+			 
+			canvas.addEventListener('mouseup', function() {
+			    canvas.removeEventListener('mousemove', onPaint,false);
+			}, false);
+			 
+			var onPaint = function() {
+			    //ctx.beginPath();
+			    ctx.beginPath();
+			    ctx.strokeStyle = getRandomColor();
+			        var x = Math.floor(Math.random() *100);
+			            var y = Math.floor(Math.random() *100);
+			            var z = Math.floor(Math.random() *100);
+
+
+				ctx.arc(mouse.x,mouse.y,40,z,Math.PI-y);
+				ctx.fillStyle= getRandomColor();
+				ctx.fill();
+        getRandomPlay();
+			};
+
+		</script>
+	</body>
+
+</html>
