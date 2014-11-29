@@ -1,0 +1,144 @@
+<html>
+	<head>
+		<title>Canvas drawing</title>
+    <meta property="og:image" content="ogimage.png" />
+    <meta property="og:title" content="Drawing Crazy Circles"/>
+    <meta property="og:description" content="A crazy page to draw circles"/>
+    <script src="howler.min.js"></script>
+  </head>
+	<body>
+
+		<div id="sketch" style="height: 100% ; width: 100%;">
+			<canvas id="paint"></canvas>
+		</div>
+
+			<script type="text/javascript">
+      		    
+
+
+   var urls = [
+               'music/Piano11.mp3',
+                           'music/Piano12.mp3',
+                                       'music/Piano13.mp3',
+                                                   'music/Piano14.mp3',
+                                                               'music/Piano15.mp3',
+                                                                           'music/Piano16.mp3',
+                                                                                       'music/Piano17.mp3',
+                                                                                                   'music/Piano18.mp3',
+                                                                                                               'music/Piano19.mp3',
+                                                                                                                           'music/Piano110.mp3',
+                                                                                                                                       'music/Piano111.mp3',
+                                                                                                                                                   'music/Piano112.mp3',
+                                                                                                                                                               'music/Piano113.mp3',
+                                                                                                                                                                           'music/Piano114.mp3',
+                                                                                                                                                                                       'music/Piano115.mp3',
+                                                                                                                                                                                                   'music/Piano116.mp3',
+                                                                                                                                                                                                               'music/Piano117.mp3',
+                                                                                                                                                                                                                           'music/Piano118.mp3',
+                                                                                                                                                                                                                                       'music/Piano119.mp3',
+                                                                                                                                                                                                                                                   'music/Piano120.mp3',
+                                                                                                                                                                                                                                                               'music/Piano121.mp3',
+                                                                                                                                                                                                                                                                           'music/Piano122.mp3',
+                                                                                                                                                                                                                                                                                       'music/Piano123.mp3',
+                                                                                                                                                                                                                                                                                                   'music/Piano124.mp3',
+                                                                                                                                                                                                                                                                                                               'music/Piano125.mp3',
+                                                                                                                                                                                                                                                                                                                           ] ;
+
+
+
+
+
+
+
+
+
+
+
+            var players = [];
+
+           urls.forEach(function(url) {
+            	var sound = new Howl({
+            		urls : [url]
+            	});
+            	players.push(sound);
+            });
+           console.log(players);
+        function getRandomPlay() 
+        {
+      
+       var index = Math.floor(Math.random() * (players.length));
+          players[index].play();
+        }
+
+
+
+
+
+
+			function getRandomColor() {
+		    var letters = '0123456789ABCDEF'.split('');
+		    var color = '#';
+		    for (var i = 0; i < 6; i++ ) {
+		        color += letters[Math.floor(Math.random() * 16)];
+		    }
+		    return color;
+			}
+			function getProgressiveColor(color) {
+					hexString = color.replace('#','');
+					 number = parseInt(hexString, 16);
+					 number += 1;
+					 return "#"+number.toString(16);
+
+			}
+			var canvas = document.querySelector('#paint');
+			var ctx = canvas.getContext('2d');
+			var sketch = document.querySelector('#sketch');
+			var sketch_style = getComputedStyle(sketch);
+			canvas.width = parseInt(sketch_style.	getPropertyValue('width'));
+			canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+			var mouse = {x: 0, y: 0};
+			var color = "#000000";
+			/* Capturando el mouse  | Cambiar por teclas*/
+
+			canvas.addEventListener('mousemove',function  (e) {
+					mouse.x = e.pageX - this.offsetLeft;
+					mouse.y = e.pageY - this.offsetTop;
+					//console.log(mouse);
+
+			}
+			,false);
+
+			ctx.lineWidth = 5;
+			ctx.lineJoin = 'round';
+			ctx.lineCap = 'round';
+			ctx.strokeStyle = getRandomColor();
+			 
+			canvas.addEventListener('mousedown', function(e) {
+			    ctx.moveTo(mouse.x, mouse.y);
+			 	ctx.strokeStyle = getRandomColor();
+			    canvas.addEventListener('mousemove', onPaint, false);
+			}, false);
+			 
+			canvas.addEventListener('mouseup', function() {
+			    canvas.removeEventListener('mousemove', onPaint,false);
+			}, false);
+			 
+			var onPaint = function() {
+			    //ctx.beginPath();
+			    ctx.beginPath();
+			    ctx.strokeStyle = getRandomColor();
+			        var x = Math.floor(Math.random() *100);
+			            var y = Math.floor(Math.random() *100);
+			            var z = Math.floor(Math.random() *100);
+
+
+				ctx.arc(mouse.x,mouse.y,40,z,Math.PI-y);
+				ctx.fillStyle= getRandomColor();
+				ctx.fill();
+        getRandomPlay();
+			};
+
+		</script>
+	</body>
+
+</html>
