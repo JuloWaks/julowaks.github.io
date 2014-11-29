@@ -58,7 +58,7 @@
 
            urls.forEach(function(url) {
             	var sound = new Howl({
-            		urls : [url]
+            		urls : url
             	});
             	players.push(sound);
             });
@@ -67,7 +67,9 @@
         {
       
        var index = Math.floor(Math.random() * (players.length));
-          players[index].play();
+          var play = players[index];
+          console.log(play);
+          play.play();
         }
 
 
